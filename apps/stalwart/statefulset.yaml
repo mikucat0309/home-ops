@@ -61,15 +61,23 @@ spec:
             - name: data
               mountPath: /var/lib/stalwart
           livenessProbe:
-            httpGet:
-              path: /healthz/live
-              port: mgmt
+            exec:
+              command:
+                - curl
+                - -fsS
+                - -o
+                - /dev/null
+                - http://127.0.0.1:8080/healthz/live
             initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
-            httpGet:
-              path: /healthz/ready
-              port: mgmt
+            exec:
+              command:
+                - curl
+                - -fsS
+                - -o
+                - /dev/null
+                - http://127.0.0.1:8080/healthz/ready
             initialDelaySeconds: 5
             periodSeconds: 10
           securityContext:
