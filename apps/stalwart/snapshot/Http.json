@@ -1,0 +1,15 @@
+{
+  "@type": "update",
+  "object": "Http",
+  "value": {
+    "allowedEndpoints": { "else": "200", "match": {} },
+    "clientIpSource": "xForwardedFor",
+    "enableHsts": false,
+    "forwardedHops": 1,
+    "rateLimitAnonymous": { "count": 100, "period": 60000 },
+    "rateLimitAuthenticated": { "count": 1000, "period": 60000 },
+    "redirectRoot": "/account",
+    "responseHeaders": {},
+    "usePermissiveCors": false
+  }
+}

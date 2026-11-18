@@ -39,6 +39,7 @@ metadata:
     app.kubernetes.io/name: stalwart
 spec:
   type: LoadBalancer
+  externalTrafficPolicy: Local
   selector:
     app.kubernetes.io/name: stalwart
   ports:

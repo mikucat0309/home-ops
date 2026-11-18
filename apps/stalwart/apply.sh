@@ -6,6 +6,7 @@ list=(
   Application
   Certificate
   DnsServer
+  Http
   NetworkListener
   Tracer
   Domain # DnsServer
