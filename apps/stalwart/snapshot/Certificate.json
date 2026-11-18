@@ -1,0 +1,12 @@
+{
+  "@type": "upsert",
+  "object": "Certificate",
+  "matchOn": ["subjectAlternativeNames"],
+  "value": {
+    "certificate-mail": {
+      "certificate": { "@type": "File", "filePath": "/etc/tls/tls.crt" },
+      "privateKey": { "@type": "File", "filePath": "/etc/tls/tls.key" },
+      "subjectAlternativeNames": { "mail.mikucat.me": true }
+    }
+  }
+}

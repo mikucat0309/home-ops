@@ -1,0 +1,24 @@
+# $schema: https://github.com/yannh/kubernetes-json-schema/raw/refs/heads/master/master/ingress.json
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: stalwart
+  labels:
+    app.kubernetes.io/name: stalwart
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - mail.mikucat.me
+      secretName: stalwart-tls
+  rules:
+    - host: mail.mikucat.me
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: stalwart
+                port:
+                  name: http

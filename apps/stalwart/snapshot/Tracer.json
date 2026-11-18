@@ -1,0 +1,21 @@
+{
+  "@type": "destroy",
+  "object": "Tracer"
+}
+{
+  "@type": "upsert",
+  "object": "Tracer",
+  "value": {
+    "tracer-stdout": {
+      "@type": "Stdout",
+      "ansi": true,
+      "buffered": true,
+      "enable": true,
+      "events": {},
+      "eventsPolicy": "exclude",
+      "level": "info",
+      "lossy": false,
+      "multiline": false
+    }
+  }
+}

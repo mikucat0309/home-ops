@@ -1,0 +1,13 @@
+{
+  "@type": "upsert",
+  "object": "AllowedIp",
+  "matchOn": ["address"],
+  "value": {
+    "allowedip-cni": {
+      "address": "10.42.0.0/16",
+      "createdAt": "2026-01-01T00:00:00Z",
+      "expiresAt": null,
+      "reason": "Kubernetes CNI"
+    }
+  }
+}

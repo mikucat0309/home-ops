@@ -1,0 +1,5 @@
+# $schema: https://github.com/yannh/kubernetes-json-schema/raw/refs/heads/master/master/namespace.json
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: stalwart

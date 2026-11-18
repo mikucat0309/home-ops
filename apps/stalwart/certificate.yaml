@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: stalwart
+  labels:
+    app.kubernetes.io/name: stalwart
+spec:
+  secretName: stalwart-tls
+  dnsNames:
+    - mail.mikucat.me
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-staging
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+    rotationPolicy: Always

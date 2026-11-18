@@ -1,0 +1,21 @@
+{
+  "@type": "upsert",
+  "object": "DnsServer",
+  "matchOn": ["description"],
+  "value": {
+    "dnsserver-cloudflare": {
+      "@type": "Cloudflare",
+      "description": "cloudflare",
+      "memberTenantId": null,
+      "pollInterval": 15000,
+      "propagationDelay": null,
+      "propagationTimeout": 60000,
+      "secret": {
+        "@type": "File",
+        "filePath": "/etc/secret/CLOUDFLARE_API_TOKEN"
+      },
+      "timeout": 30000,
+      "ttl": 300000
+    }
+  }
+}
