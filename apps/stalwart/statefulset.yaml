@@ -23,8 +23,6 @@ spec:
             - "--config"
             - "/etc/stalwart/config.json"
           env:
-            - name: STALWART_RECOVERY_MODE
-              value: "false"
             - name: STALWART_RECOVERY_MODE_PORT
               value: "8080"
           envFrom:
