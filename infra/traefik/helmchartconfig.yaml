@@ -5,6 +5,16 @@ metadata:
   namespace: kube-system
 spec:
   valuesContent: |-
+    ports:
+      web:
+        hostPort: 80
+      websecure:
+        hostPort: 443
     service:
       spec:
-        externalTrafficPolicy: Local
+        type: ClusterIP
+    updateStrategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxUnavailable: 1
+        maxSurge: 0

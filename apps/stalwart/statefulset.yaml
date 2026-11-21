@@ -31,14 +31,19 @@ spec:
           ports:
             - name: smtp
               containerPort: 25
+              hostPort: 25
             - name: smtps
               containerPort: 465
+              hostPort: 465
             - name: submission
               containerPort: 587
+              hostPort: 587
             - name: imaps
               containerPort: 993
+              hostPort: 993
             - name: sieve
               containerPort: 4190
+              hostPort: 4190
             - name: http
               containerPort: 80
             - name: https
