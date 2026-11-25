@@ -76,6 +76,7 @@ spec:
             periodSeconds: 10
           securityContext:
             allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
             capabilities:
               drop: [ALL]
               add: [NET_BIND_SERVICE]
@@ -104,4 +105,4 @@ spec:
         storageClassName: local-path
         resources:
           requests:
-            storage: 1Gi
+            storage: 1Gi # local-path ignored
