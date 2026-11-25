@@ -9,6 +9,7 @@ resources:
   - ingress.yaml
   - middleware.yaml
   - certificate.yaml
+  - cronjob.yaml
 configMapGenerator:
   - name: stalwart-config
     files:

@@ -1,0 +1,48 @@
+# $schema: https://github.com/yannh/kubernetes-json-schema/raw/refs/heads/master/master/cronjob.json
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: stalwart-tls-reload
+  labels:
+    app.kubernetes.io/name: stalwart
+spec:
+  schedule: "0 4 * * 1"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/name: stalwart-tls-reload
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: stalwart-cli
+              image: ghcr.io/stalwartlabs/cli:2.0.0
+              args: [create, Action/ReloadTlsCertificates]
+              env:
+                - name: STALWART_URL
+                  value: https://mail.mikucat.me
+                - name: STALWART_USER
+                  value: tls-reload
+              envFrom:
+                - secretRef:
+                    name: stalwart-tls-reload
+              volumeMounts:
+                - name: cache
+                  mountPath: /home/nonroot/.cache
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
+                capabilities:
+                  drop: [ALL]
+          volumes:
+            - name: cache
+              emptyDir: {}
+          automountServiceAccountToken: false
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65532
+            runAsGroup: 65532
+            seccompProfile:
+              type: RuntimeDefault
