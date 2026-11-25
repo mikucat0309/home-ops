@@ -1,0 +1,18 @@
+{
+  "@type": "upsert",
+  "object": "Role",
+  "matchOn": ["description"],
+  "value": {
+    "role-tls-reloader": {
+      "description": "TLS Reloader",
+      "disabledPermissions": {},
+      "enabledPermissions": {
+        "authenticate": true,
+        "sysActionCreate": true,
+        "actionReloadTlsCertificates": true
+      },
+      "memberTenantId": null,
+      "roleIds": {}
+    }
+  }
+}

@@ -10,6 +10,7 @@ list=(
   DnsServer
   Http
   NetworkListener
+  Role
   Tracer
   Domain # DnsServer
   SystemSettings # Domain
