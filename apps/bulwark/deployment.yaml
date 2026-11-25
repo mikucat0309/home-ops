@@ -31,6 +31,14 @@ spec:
               value: "true"
             - name: SESSION_SECRET_FILE
               value: /etc/secret/SESSION_SECRET
+            - name: OAUTH_CLIENT_ID
+              value: bulwark-webmail
+            - name: OAUTH_CLIENT_SECRET_FILE
+              value: /etc/secret/OAUTH_CLIENT_SECRET
+            - name: OAUTH_ISSUER_URL
+              value: https://mail.mikucat.me
+            - name: OAUTH_EXTRA_SCOPES
+              value: urn:stalwart:oauth:scope:security urn:stalwart:oauth:scope:settings
           envFrom:
             - secretRef:
                 name: bulwark-env
