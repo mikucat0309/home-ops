@@ -61,6 +61,8 @@ spec:
               readOnly: true
             - name: data
               mountPath: /var/lib/stalwart
+            - name: tmp
+              mountPath: /tmp
           startupProbe:
             exec:
               command: [curl, -fsS, -o, /dev/null, http://127.0.0.1:8080/healthz/live]
@@ -92,6 +94,8 @@ spec:
           secret:
             secretName: stalwart-tls
             defaultMode: 0440
+        - name: tmp
+          emptyDir: {}
       automountServiceAccountToken: false
       securityContext:
         runAsNonRoot: true
