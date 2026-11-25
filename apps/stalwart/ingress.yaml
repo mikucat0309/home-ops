@@ -5,6 +5,8 @@ metadata:
   name: stalwart
   labels:
     app.kubernetes.io/name: stalwart
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: stalwart-cors@kubernetescrd
 spec:
   ingressClassName: traefik
   tls:

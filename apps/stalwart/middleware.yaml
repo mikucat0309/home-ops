@@ -1,0 +1,15 @@
+# $schema: https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/traefik.io/middleware_v1alpha1.json
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: cors
+  labels:
+    app.kubernetes.io/name: stalwart
+spec:
+  headers:
+    accessControlAllowOriginList:
+      - https://webmail.mikucat.me
+    accessControlAllowMethods: [GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS]
+    accessControlAllowHeaders: [Authorization, Content-Type, Accept, X-Requested-With]
+    accessControlMaxAge: 86400
+    addVaryHeader: true
