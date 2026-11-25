@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+export STALWART_URL=https://mail.mikucat.me
+
 list=(
   AllowedIp
   Application
@@ -15,6 +17,6 @@ list=(
 
 trap 'rm -f snapshot.ndjson' EXIT
 for type in "${list[@]}"; do
-  jq -c '.' snapshot/$type.json >> snapshot.ndjson
+  jq -c '.' $type.json >> snapshot.ndjson
 done
 stalwart-cli -k apply --file snapshot.ndjson
