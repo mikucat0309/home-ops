@@ -1,3 +1,4 @@
+# $schema: https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/helm.cattle.io/helmchartconfig_v1.json
 apiVersion: helm.cattle.io/v1
 kind: HelmChartConfig
 metadata:
