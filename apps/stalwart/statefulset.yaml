@@ -63,44 +63,22 @@ spec:
               mountPath: /var/lib/stalwart
           startupProbe:
             exec:
-              command:
-                - curl
-                - -fsS
-                - -o
-                - /dev/null
-                - http://127.0.0.1:8080/healthz/live
+              command: [curl, -fsS, -o, /dev/null, http://127.0.0.1:8080/healthz/live]
             periodSeconds: 5
             failureThreshold: 24
           livenessProbe:
             exec:
-              command:
-                - curl
-                - -fsS
-                - -o
-                - /dev/null
-                - http://127.0.0.1:8080/healthz/live
+              command: [curl, -fsS, -o, /dev/null, http://127.0.0.1:8080/healthz/live]
             periodSeconds: 10
           readinessProbe:
             exec:
-              command:
-                - curl
-                - -fsS
-                - -o
-                - /dev/null
-                - http://127.0.0.1:8080/healthz/ready
+              command: [curl, -fsS, -o, /dev/null, http://127.0.0.1:8080/healthz/ready]
             periodSeconds: 10
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
-              drop:
-                - ALL
-              add:
-                - NET_BIND_SERVICE
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 2000
-        runAsGroup: 2000
-        fsGroup: 2000
+              drop: [ALL]
+              add: [NET_BIND_SERVICE]
       volumes:
         - name: config
           configMap:
@@ -113,12 +91,16 @@ spec:
           secret:
             secretName: stalwart-tls
             defaultMode: 0440
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 2000
+        runAsGroup: 2000
+        fsGroup: 2000
   volumeClaimTemplates:
     - metadata:
         name: data
       spec:
-        accessModes:
-          - ReadWriteOnce
+        accessModes: [ReadWriteOnce]
         storageClassName: local-path
         resources:
           requests:
