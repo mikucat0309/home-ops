@@ -61,6 +61,16 @@ spec:
               readOnly: true
             - name: data
               mountPath: /var/lib/stalwart
+          startupProbe:
+            exec:
+              command:
+                - curl
+                - -fsS
+                - -o
+                - /dev/null
+                - http://127.0.0.1:8080/healthz/live
+            periodSeconds: 5
+            failureThreshold: 24
           livenessProbe:
             exec:
               command:
@@ -69,7 +79,6 @@ spec:
                 - -o
                 - /dev/null
                 - http://127.0.0.1:8080/healthz/live
-            initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
             exec:
@@ -79,7 +88,6 @@ spec:
                 - -o
                 - /dev/null
                 - http://127.0.0.1:8080/healthz/ready
-            initialDelaySeconds: 5
             periodSeconds: 10
           securityContext:
             allowPrivilegeEscalation: false
