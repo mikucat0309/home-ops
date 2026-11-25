@@ -3,16 +3,6 @@
   "object": "Application",
   "matchOn": ["description"],
   "value": {
-    "application-bulwark": {
-      "autoUpdateInterval": 7776000000,
-      "description": "Bulwark Webmail",
-      "enable": true,
-      "oauthClientId": null,
-      "oauthScopes": {},
-      "resourceUrl": "https://github.com/bulwarkmail/webmail/releases/download/1.21.2/bulwark-lite-stalwart.zip",
-      "unpackDirectory": null,
-      "urlPrefix": { "/webmail": true }
-    },
     "application-stalwart": {
       "autoUpdateInterval": 7776000000,
       "description": "Stalwart Web Interface",
