@@ -1,0 +1,14 @@
+# $schema: https://github.com/yannh/kubernetes-json-schema/raw/refs/heads/master/master/service.json
+apiVersion: v1
+kind: Service
+metadata:
+  name: bulwark
+  labels:
+    app.kubernetes.io/name: bulwark
+spec:
+  selector:
+    app.kubernetes.io/name: bulwark
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

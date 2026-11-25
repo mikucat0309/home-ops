@@ -1,0 +1,24 @@
+# $schema: https://github.com/yannh/kubernetes-json-schema/raw/refs/heads/master/master/ingress.json
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bulwark
+  labels:
+    app.kubernetes.io/name: bulwark
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - webmail.mikucat.me
+      secretName: bulwark-tls
+  rules:
+    - host: webmail.mikucat.me
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bulwark
+                port:
+                  name: http

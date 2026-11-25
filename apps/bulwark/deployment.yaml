@@ -1,0 +1,88 @@
+# $schema: https://github.com/yannh/kubernetes-json-schema/raw/refs/heads/master/master/deployment.json
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bulwark
+  labels:
+    app.kubernetes.io/name: bulwark
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: bulwark
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: bulwark
+    spec:
+      containers:
+        - name: bulwark
+          image: ghcr.io/bulwarkmail/webmail:1.21.3
+          env:
+            - name: JMAP_SERVER_URL
+              value: https://mail.mikucat.me
+            - name: TRUSTED_PROXY_DEPTH
+              value: "1"
+            - name: SETTINGS_SYNC_ENABLED
+              value: "true"
+            - name: LOG_LEVEL
+              value: info
+            - name: NO_THIRD_PARTY_TRAFFIC
+              value: "true"
+            - name: SESSION_SECRET_FILE
+              value: /etc/secret/SESSION_SECRET
+          envFrom:
+            - secretRef:
+                name: bulwark-env
+          ports:
+            - name: http
+              containerPort: 3000
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
+            - name: next-cache
+              mountPath: /app/.next/cache
+            - name: tmp
+              mountPath: /tmp
+            - name: secret
+              mountPath: /etc/secret
+              readOnly: true
+          startupProbe:
+            httpGet:
+              path: /api/health
+              port: http
+            periodSeconds: 5
+            failureThreshold: 24
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: http
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /api/ready
+              port: http
+            periodSeconds: 10
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: [ALL]
+      volumes:
+        - name: data
+          emptyDir: {}
+        - name: next-cache
+          emptyDir: {}
+        - name: tmp
+          emptyDir: {}
+        - name: secret
+          secret:
+            secretName: bulwark-secret
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+        seccompProfile:
+          type: RuntimeDefault
