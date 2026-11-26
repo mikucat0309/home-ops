@@ -9,6 +9,7 @@ spec:
   secretName: stalwart-tls
   dnsNames:
     - mail.mikucat.me
+    - mta-sts.mikucat.me
   issuerRef:
     kind: ClusterIssuer
     name: letsencrypt-production

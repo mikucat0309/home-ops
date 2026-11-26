@@ -12,6 +12,7 @@ spec:
   tls:
     - hosts:
         - mail.mikucat.me
+        - mta-sts.mikucat.me
       secretName: stalwart-tls
   rules:
     - host: mail.mikucat.me
@@ -19,6 +20,16 @@ spec:
         paths:
           - path: /
             pathType: Prefix
+            backend:
+              service:
+                name: stalwart
+                port:
+                  name: http
+    - host: mta-sts.mikucat.me
+      http:
+        paths:
+          - path: /.well-known/mta-sts.txt
+            pathType: Exact
             backend:
               service:
                 name: stalwart
